@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set pastetoggle=<F2>
 filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
