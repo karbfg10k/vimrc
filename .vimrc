@@ -3,7 +3,17 @@ set pastetoggle=<F2>
 filetype off                  " required
 set smartindent
 set spell spelllang=en_us
+set relativenumber
+set number
+set showcmd
+set cursorline
+set wildmenu
+set lazyredraw
+set showmatch
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
 set rtp+=~/.vim/bundle/Vundle.vim
+
 
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -11,6 +21,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rust-lang/rust.vim'
 Plugin 'vim-airline/vim-airline'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'Conque-Shell'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Valloric/YouCompleteMe'
@@ -21,6 +32,10 @@ Bundle 'Raimondi/delimitMate'
 
 call vundle#end()            " required
 filetype plugin indent on
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
 syntax enable
 set background=dark
