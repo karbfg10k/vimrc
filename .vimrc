@@ -12,6 +12,13 @@ set lazyredraw
 set showmatch
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
+set background=dark
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 set rtp+=~/.vim/bundle/Vundle.vim
 
 
@@ -32,20 +39,12 @@ Bundle 'Raimondi/delimitMate'
 
 call vundle#end()            " required
 filetype plugin indent on
-
-" move vertically by visual line
-nnoremap j gj
-nnoremap k gk
-
-syntax enable
-set background=dark
 colorscheme solarized
-
+syntax enable
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -66,4 +65,3 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
