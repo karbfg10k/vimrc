@@ -39,13 +39,14 @@ nnoremap k gk
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
 colorscheme solarized
 syntax enable
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:rustfmt_autosave = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -57,6 +58,7 @@ let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_python_exec = 'python3'
 
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
