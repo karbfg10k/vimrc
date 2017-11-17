@@ -1,26 +1,36 @@
-set nocompatible              " be iMproved, required
-set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rust-lang/rust.vim'
-Plugin 'vim-airline/vim-airline'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-sensible'
-Bundle 'Raimondi/delimitMate'
-call vundle#end()            " required
+if &compatible
+  set nocompatible
+endif
+
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/deoplete.nvim'
+NeoBundle 'w0rp/ale'
+NeoBundle 'sebastianmarkow/deoplete-rust'
+NeoBundle 'mklabs/split-term.vim'
+
+call neobundle#end()
+
+filetype plugin indent on
+
+NeoBundleCheck
 
 set pastetoggle=<F2>
-filetype off                  " required
 set smartindent
 set autoindent
-set spell spelllang=en_us
 set relativenumber
 set number
 set showcmd
@@ -31,41 +41,30 @@ set showmatch
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 set background=dark
+colorscheme solarized
+set clipboard+=unnamedplus
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set splitright
+syntax enable
 
 " move vertically by visual line
 nnoremap j gj
 nnoremap k gk
+map <c-up> <C-w><up>
+map <c-down> <C-w><down>
+map <c-left> <C-w><left>
+map <c-right> <C-w><right>
+cnorea <expr> te getcmdtype() == ':' && getcmdline() ==# 'te' ? 'VTerm' : 'te'
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+tnoremap <Esc> <C-\><C-n>
 
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
-
-filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-colorscheme solarized
-syntax enable
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler = "g++"
-let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall"
-let g:syntastic_c_remove_include_errors = 1
-let g:syntastic_cpp_remove_include_errors = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_python_python_exec = 'python3'
-
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-let g:ycm_filetype_whitelist = { '*': 1 }
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:split_right_vertical = 1
+let g:rustfmt_autosave = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#rust#racer_binary='/home/karthik/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/karthik/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+let g:deoplete#sources#rust#show_duplicates=1
+let g:deoplete#sources#rust#disable_keymap=1
+let g:deoplete#sources#rust#documentation_max_height=20
